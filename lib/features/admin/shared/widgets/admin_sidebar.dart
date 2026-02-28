@@ -80,6 +80,14 @@ class AdminSidebar extends ConsumerWidget {
                     collapsed: collapsed,
                   ),
                   SidebarItem(
+                    icon: Icons.message,
+                    label: "Messages",
+                    route: AdminRoutes.messages,
+                    isActive:
+                    currentRoute == AdminRoutes.messages,
+                    collapsed: collapsed,
+                  ),
+                  SidebarItem(
                     icon: Icons.event_outlined,
                     label: "Events",
                     route: AdminRoutes.events,

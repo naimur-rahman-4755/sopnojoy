@@ -4,5 +4,7 @@ class AdminRoutes {
   static const dashboard = '/admin/dashboard';
   static const events = '/admin/events';
   static const notices = '/admin/notices';
+  static const volunteer = '/admin/volunteer';
+  static const messages = '/admin/messages';
   static const settings = '/admin/settings';
 }

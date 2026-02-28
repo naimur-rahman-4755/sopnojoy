@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sopnojoy/features/admin/notices/notice_screen.dart';
+import '../features/admin/messages/admin_message_screen.dart';
 import '../features/public/home/screen/home_screen.dart';
 import '../features/public/about/about_screen.dart';
 import '../features/public/activities/what_we_do.dart';
@@ -60,6 +62,32 @@ class AppRoutes {
           RouteGuard(
             currentRoute: AdminRoutes.dashboard,
             child: const DashboardScreen(),
+          ),
+        );
+      case AdminRoutes.notices:
+        return _page(
+          RouteGuard(
+            currentRoute: AdminRoutes.notices,
+            child: const AdminNoticeScreen(currentRoute: AdminRoutes.notices),
+          ),
+        );
+      // case AdminRoutes.volunteer:
+      //   return _page(
+      //     RouteGuard(
+      //       currentRoute: AdminRoutes.volunteer,
+      //       child: const AdminVolunteerScreen(
+      //         currentRoute: AdminRoutes.volunteer,
+      //       ),
+      //     ),
+      //   );
+
+      case AdminRoutes.messages:
+        return _page(
+          RouteGuard(
+            currentRoute: AdminRoutes.messages,
+            child: const MessagesScreen(
+              currentRoute: AdminRoutes.messages,
+            ),
           ),
         );
 

@@ -14,26 +14,35 @@ class DashboardScreen extends StatelessWidget {
     return AdminLayout(
       currentRoute: name,
       child: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(AppSpacing.xl),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // KPI / Dashboard grid
-              const DashboardGrid(),
-              const SizedBox(height: AppSpacing.xl),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              padding: const EdgeInsets.all(AppSpacing.xl),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // KPI / Dashboard grid
+                    const DashboardGrid(),
+                    const SizedBox(height: AppSpacing.xl),
 
-              // Recent activity + Quick actions
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Expanded(child: RecentActivityPanel()),
-                  SizedBox(width: AppSpacing.xl),
-                  Expanded(child: QuickActionsPanel()),
-                ],
+                    // Recent activity + Quick actions
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Expanded(child: RecentActivityPanel()),
+                        SizedBox(width: AppSpacing.xl),
+                        Expanded(child: QuickActionsPanel()),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

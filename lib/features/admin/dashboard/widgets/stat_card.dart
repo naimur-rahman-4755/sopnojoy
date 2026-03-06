@@ -7,10 +7,7 @@ import '../../../../../core/constacts/text_style.dart';
 class ImpactStatCard extends StatefulWidget {
   final DashboardStat stat;
 
-  const ImpactStatCard({
-    super.key,
-    required this.stat,
-  });
+  const ImpactStatCard({super.key, required this.stat});
 
   @override
   State<ImpactStatCard> createState() => _ImpactStatCardState();
@@ -21,11 +18,8 @@ class _ImpactStatCardState extends State<ImpactStatCard> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    final Color growthColor = widget.stat.isPositive
-        ? AppColors.success
-        : AppColors.error;
+    final Color growthColor =
+    widget.stat.isPositive ? AppColors.success : AppColors.error;
 
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
@@ -40,9 +34,7 @@ class _ImpactStatCardState extends State<ImpactStatCard> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
           color: AppColors.cardBg.withOpacity(.85),
-          border: Border.all(
-            color: AppColors.border.withOpacity(.5),
-          ),
+          border: Border.all(color: AppColors.border.withOpacity(.5)),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(_isHovered ? .12 : .06),
@@ -51,10 +43,13 @@ class _ImpactStatCardState extends State<ImpactStatCard> {
             ),
           ],
         ),
+        // Minimum height for balance
+        constraints: const BoxConstraints(minHeight: 120),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min, // <-- makes card height based on content
           children: [
-            /// Top Row → Icon + Growth
+            // Icon + growth row
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -93,9 +88,9 @@ class _ImpactStatCardState extends State<ImpactStatCard> {
               ],
             ),
 
-            const Spacer(),
+            const SizedBox(height: AppSpacing.sm), // small spacing
 
-            /// Animated Value (Ready for Supabase updates)
+            // Value
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 300),
               switchInCurve: Curves.easeOut,
@@ -109,6 +104,7 @@ class _ImpactStatCardState extends State<ImpactStatCard> {
 
             const SizedBox(height: AppSpacing.xs),
 
+            // Title
             Text(
               widget.stat.title,
               style: AppTextStyles.bodyLarge.copyWith(

@@ -88,6 +88,22 @@ class AdminSidebar extends ConsumerWidget {
                     collapsed: collapsed,
                   ),
                   SidebarItem(
+                    icon: Icons.volunteer_activism_rounded,
+                    label: "Impact",
+                    route: AdminRoutes.impact,
+                    isActive:
+                    currentRoute == AdminRoutes.impact,
+                    collapsed: collapsed,
+                  ),
+                  SidebarItem(
+                    icon: Icons.volunteer_activism,
+                    label: "Volunteer",
+                    route: AdminRoutes.volunteer,
+                    isActive:
+                    currentRoute == AdminRoutes.volunteer,
+                    collapsed: collapsed,
+                  ),
+                  SidebarItem(
                     icon: Icons.event_outlined,
                     label: "Events",
                     route: AdminRoutes.events,

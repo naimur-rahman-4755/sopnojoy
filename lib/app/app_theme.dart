@@ -10,6 +10,7 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
 
+    fontFamily: 'NotoSans',
     // =========================
     // Global Colors
     // =========================

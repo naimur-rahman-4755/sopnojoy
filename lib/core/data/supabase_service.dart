@@ -1,5 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../features/admin/messages/widgets/admin_message_model.dart';
+import '../../features/admin/volunteer/widgets/volunteer_admin_model.dart';
 import '../../features/public/activities/data/event_model.dart';
 import '../../features/public/contact/data/contact_message_model.dart';
 import '../../features/public/home/notice_banner/notice_banner_model.dart';
@@ -91,6 +92,42 @@ class SupabaseService {
         .update({'admin_notes': notes})
         .eq('id', id);
   }
+
+  // ----------------------
+// Admin Volunteer Methods
+// ----------------------
+
+  Future<List<VolunteerAdminModel>> fetchAllVolunteerApplications() async {
+    final response = await _client
+        .from('volunteer_applications')
+        .select()
+        .order('created_at', ascending: false);
+
+    return (response as List)
+        .map((e) => VolunteerAdminModel.fromMap(e))
+        .toList(growable: false);
+  }
+
+  Future<void> updateVolunteerStatus({
+    required String id,
+    required String status,
+  }) async {
+    await _client
+        .from('volunteer_applications')
+        .update({'status': status})
+        .eq('id', id);
+  }
+
+  Future<void> updateVolunteerNotes({
+    required String id,
+    required String notes,
+  }) async {
+    await _client
+        .from('volunteer_applications')
+        .update({'notes': notes})
+        .eq('id', id);
+  }
+
 
   // ----------------------
   // Impact Metrics

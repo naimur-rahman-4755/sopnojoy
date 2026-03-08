@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sopnojoy/features/public/impact/widgets/gallery_grid.dart';
 
 import '../../../core/constacts/assets.dart';
 import '../../../core/constacts/color.dart';
@@ -49,8 +50,6 @@ class ImpactBody extends StatelessWidget {
   final bool isDesktop;
   final double viewportWidth;
 
-  static const int _galleryItemCount = 6;
-
   @override
   Widget build(BuildContext context) {
     final contentHorizontalPadding = _contentPaddingFor(viewportWidth);
@@ -93,19 +92,33 @@ class ImpactBody extends StatelessWidget {
             contentHorizontalPadding,
             AppSpacing.xxl,
           ),
-          sliver: SliverGrid(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: galleryCrossAxisCount,
-              crossAxisSpacing: AppSpacing.md,
-              mainAxisSpacing: AppSpacing.md,
-              childAspectRatio: 1,
-            ),
-            delegate: SliverChildBuilderDelegate(
-                  (context, index) => const _GalleryTile(),
-              childCount: _galleryItemCount,
-              addAutomaticKeepAlives: false,
-              addRepaintBoundaries: true,
-            ),
+          sliver: Consumer(
+            builder: (context, ref, _) {
+              final imagesAsync = ref.watch(galleryImagesProvider);
+
+              return imagesAsync.when(
+                loading: () => const SliverToBoxAdapter(
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+
+                error: (e, _) => const SliverToBoxAdapter(
+                  child: Center(child: Text("Failed to load gallery")),
+                ),
+
+                data: (images) {
+                  if (images.isEmpty) {
+                    return const SliverToBoxAdapter(
+                      child: Center(child: Text("No images available")),
+                    );
+                  }
+
+                  return GalleryGrid(
+                    crossAxisCount: galleryCrossAxisCount,
+                    images: images,
+                  );
+                },
+              );
+            },
           ),
         ),
 
@@ -498,24 +511,6 @@ class _PhotoGalleryHeader extends StatelessWidget {
   }
 }
 
-class _GalleryTile extends StatelessWidget {
-  const _GalleryTile();
-
-  @override
-  Widget build(BuildContext context) {
-    return RepaintBoundary(
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-        child: Image.asset(
-          AppAssets.new1,
-          fit: BoxFit.cover,
-          width: double.infinity,
-          height: double.infinity,
-        ),
-      ),
-    );
-  }
-}
 
 class _ImpactCTASection extends StatelessWidget {
   const _ImpactCTASection();

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sopnojoy/features/admin/notices/notice_screen.dart';
 import '../features/admin/activities/admin_impact_screen.dart';
+import '../features/admin/events/admin_event_screen.dart';
+import '../features/admin/gallery/admin_gallery_screen.dart';
 import '../features/admin/messages/admin_message_screen.dart';
 import '../features/admin/volunteer/admin_volunteer_screen.dart';
 import '../features/public/home/screen/home_screen.dart';
@@ -98,6 +100,23 @@ class AppRoutes {
           RouteGuard(
             currentRoute: AdminRoutes.impact,
             child: const AdminImpactScreen(),
+          ),
+        );
+
+      case AdminRoutes.gallery:
+        return _page(
+          RouteGuard(
+            currentRoute: AdminRoutes.gallery,
+            child: const GalleryAdminScreen(),
+          ),
+        );
+
+
+      case AdminRoutes.events:
+        return _page(
+          RouteGuard(
+            currentRoute: AdminRoutes.events,
+            child: const AdminEventsScreen(),
           ),
         );
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../public/impact/widgets/impact_metrics_model.dart';
+import '../../../public/impact/data/impact_metrics_model.dart';
 import 'impact_metric_card.dart';
 
 class ImpactMetricsGrid extends StatelessWidget {

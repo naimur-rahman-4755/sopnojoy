@@ -104,6 +104,14 @@ class AdminSidebar extends ConsumerWidget {
                     collapsed: collapsed,
                   ),
                   SidebarItem(
+                    icon: Icons.image_outlined,
+                    label: "Gallery",
+                    route: AdminRoutes.gallery,
+                    isActive:
+                    currentRoute == AdminRoutes.gallery,
+                    collapsed: collapsed,
+                  ),
+                  SidebarItem(
                     icon: Icons.event_outlined,
                     label: "Events",
                     route: AdminRoutes.events,

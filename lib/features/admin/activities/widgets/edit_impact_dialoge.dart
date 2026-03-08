@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/provider/admin_impact_provider.dart';
-import '../../../public/impact/widgets/impact_metrics_model.dart';
+import '../../../public/impact/data/impact_metrics_model.dart';
 
 class EditImpactDialog extends ConsumerStatefulWidget {
   final ImpactMetric metric;

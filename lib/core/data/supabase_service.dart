@@ -1,10 +1,14 @@
+import 'dart:typed_data';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../features/admin/events/data/admin_event_model.dart';
 import '../../features/admin/messages/widgets/admin_message_model.dart';
 import '../../features/admin/volunteer/widgets/volunteer_admin_model.dart';
 import '../../features/public/activities/data/event_model.dart';
 import '../../features/public/contact/data/contact_message_model.dart';
 import '../../features/public/home/notice_banner/notice_banner_model.dart';
-import '../../features/public/impact/widgets/impact_metrics_model.dart';
+import '../../features/public/impact/data/gallery_image_model.dart';
+import '../../features/public/impact/data/impact_metrics_model.dart';
 import '../../features/public/volunteer/model/volunteer_application_model.dart';
 
 class SupabaseService {
@@ -178,6 +182,115 @@ class SupabaseService {
       throw Exception('Something went wrong. Please try again.');
     }
   }
+  // ----------------------
+// Gallery Images
+// ----------------------
+
+  Future<List<GalleryImage>> fetchGalleryImages() async {
+    final response = await _client
+        .from('gallery_images')
+        .select()
+        .order('created_at', ascending: false);
+
+    return (response as List)
+        .map((e) => GalleryImage.fromMap(e))
+        .toList(growable: false);
+  }
+
+  // ----------------------
+// Upload Gallery Image
+// ----------------------
+
+  Future<GalleryImage> uploadGalleryImage({
+    required String fileName,
+    required Uint8List bytes,
+    String? title,
+  }) async {
+    final path = 'gallery/$fileName';
+
+    // Upload to storage
+    await _client.storage.from('gallery').uploadBinary(
+      path,
+      bytes,
+      fileOptions: const FileOptions(
+        cacheControl: '3600',
+        upsert: false,
+      ),
+    );
+
+    // Get public URL
+    final imageUrl =
+    _client.storage.from('gallery').getPublicUrl(path);
+
+    // Insert DB record
+    final response = await _client
+        .from('gallery_images')
+        .insert({
+      'title': title,
+      'image_url': imageUrl,
+      'image_path': path,
+    })
+        .select()
+        .single();
+
+    return GalleryImage.fromMap(response);
+  }
+
+  // ----------------------
+// Delete Gallery Image
+// ----------------------
+
+  Future<void> deleteGalleryImage(GalleryImage image) async {
+    // Delete from storage
+    await _client.storage.from('gallery').remove([
+      image.imagePath,
+    ]);
+
+    // Delete database record
+    await _client
+        .from('gallery_images')
+        .delete()
+        .eq('id', image.id);
+  }
+
+  // ----------------------
+// Admin Events
+// ----------------------
+
+  Future<List<EventAdminModel>> fetchAdminEvents() async {
+    final response = await _client
+        .from('events')
+        .select()
+        .order('event_date', ascending: false);
+
+    return (response as List)
+        .map((e) => EventAdminModel.fromMap(e))
+        .toList(growable: false);
+  }
+
+  Future<void> insertEvent({
+    required String title,
+    required DateTime eventDate,
+    String? location,
+    String? description,
+    required String ctaText,
+    String? ctaUrl,
+    String? coverImageUrl,
+  }) async {
+    await _client.from('events').insert({
+      'title': title,
+      'event_date': eventDate.toIso8601String(),
+      'location': location,
+      'description': description,
+      'cta_text': ctaText,
+      'cta_url': ctaUrl,
+    });
+  }
+
+  Future<void> deleteEvent(String id) async {
+    await _client.from('events').delete().eq('id', id);
+  }
+
 
   // ----------------------
   // Events

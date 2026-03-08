@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constacts/color.dart';
 import '../../../../core/constacts/text_style.dart';
-import '../../../public/impact/widgets/impact_metrics_model.dart';
+import '../../../public/impact/data/impact_metrics_model.dart';
 import '../../../../../core/constacts/spacing.dart';
 import 'edit_impact_dialoge.dart';
 

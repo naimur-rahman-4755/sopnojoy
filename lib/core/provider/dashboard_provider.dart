@@ -4,7 +4,7 @@ import 'package:sopnojoy/core/provider/supabase_provider.dart';
 
 import '../../features/admin/dashboard/widgets/state_model.dart';
 import '../../features/admin/messages/widgets/admin_message_model.dart';
-import '../../features/public/impact/widgets/impact_metrics_model.dart';
+import '../../features/public/impact/data/impact_metrics_model.dart';
 
 /// Fetch impact metrics
 final impactMetricsProvider =

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constacts/color.dart';
 import '../../../../core/constacts/spacing.dart';
 import '../../../../core/provider/supabase_provider.dart';
-import '../../impact/widgets/impact_metrics_model.dart';
+import '../../impact/data/impact_metrics_model.dart';
 
 class OurImpactSection extends ConsumerWidget {
   const OurImpactSection({super.key});

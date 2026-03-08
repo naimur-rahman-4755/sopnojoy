@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../features/admin/activities/data/impact_repository.dart';
-import '../../features/public/impact/widgets/impact_metrics_model.dart';
+import '../../features/public/impact/data/impact_metrics_model.dart';
 
 final impactRepositoryProvider = Provider<ImpactRepository>((ref) {
   final client = Supabase.instance.client;

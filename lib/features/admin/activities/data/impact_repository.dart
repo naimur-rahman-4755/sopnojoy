@@ -1,5 +1,5 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../../public/impact/widgets/impact_metrics_model.dart';
+import '../../../public/impact/data/impact_metrics_model.dart';
 
 class ImpactRepository {
   final SupabaseClient client;

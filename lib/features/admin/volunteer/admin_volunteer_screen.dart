@@ -9,7 +9,7 @@ import 'widgets/volunteer_data_table.dart';
 
 class VolunteerAdminScreen extends ConsumerStatefulWidget {
   const VolunteerAdminScreen({super.key, required String currentRoute});
-  static const name = '/admin/volunteers';
+  static const name = '/shopnopanelx/volunteers';
 
   @override
   ConsumerState<VolunteerAdminScreen> createState() =>

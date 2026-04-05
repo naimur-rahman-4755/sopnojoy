@@ -13,6 +13,8 @@ import 'widgets/gallery_grid.dart';
 class GalleryAdminScreen extends ConsumerWidget {
   const GalleryAdminScreen({super.key});
 
+  static const name = "/shopnopanelx/gallery";
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final imagesAsync = ref.watch(galleryImagesProvider);

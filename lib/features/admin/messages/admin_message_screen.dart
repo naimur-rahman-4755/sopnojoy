@@ -11,7 +11,7 @@ import '../shared/layout/admin_layout.dart';
 
 class MessagesScreen extends ConsumerWidget {
   const MessagesScreen({super.key, required String currentRoute});
-  static const name = '/admin/messages';
+  static const name = '/shopnopanelx/messages';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

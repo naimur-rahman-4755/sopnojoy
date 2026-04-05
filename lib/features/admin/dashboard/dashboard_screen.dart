@@ -7,7 +7,7 @@ import 'widgets/recent_activity_panel.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
-  static const name = '/admin/dashboard';
+  static const name = '/shopnopanelx/dashboard';
 
   @override
   Widget build(BuildContext context) {

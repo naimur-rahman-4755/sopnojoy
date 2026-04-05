@@ -10,7 +10,7 @@ import '../../../core/provider/supabase_provider.dart';
 class AdminEventsScreen extends ConsumerWidget {
   const AdminEventsScreen({super.key});
 
-  static const name = "/admin/events";
+  static const name = "/shopnopanelx/events";
 
   int _gridCount(double width) {
     if (width > 1100) return 3;

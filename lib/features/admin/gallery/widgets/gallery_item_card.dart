@@ -35,9 +35,19 @@ class GalleryItemCard extends ConsumerWidget {
 
     final service = ref.read(supabaseServiceProvider);
 
-    await service.deleteGalleryImage(image);
+    try {
+      await service.deleteGalleryImage(image);
 
-    ref.invalidate(galleryImagesProvider);
+      ref.invalidate(galleryImagesProvider);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Image deleted")),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Delete failed: $e")),
+      );
+    }
   }
 
   @override

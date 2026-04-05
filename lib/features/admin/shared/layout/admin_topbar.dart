@@ -74,10 +74,6 @@ class AdminTopBar extends StatelessWidget {
             ),
             itemBuilder: (context) => [
               const PopupMenuItem(
-                value: 1,
-                child: Text('Profile'),
-              ),
-              const PopupMenuItem(
                 value: 2,
                 child: Text('Logout'),
               ),

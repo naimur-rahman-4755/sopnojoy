@@ -3,7 +3,6 @@ class AdminMessage {
   final String name;
   final String email;
   final String message;
-  final String status;
   final String? adminNotes;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -13,7 +12,6 @@ class AdminMessage {
     required this.name,
     required this.email,
     required this.message,
-    required this.status,
     this.adminNotes,
     required this.createdAt,
     required this.updatedAt,
@@ -25,7 +23,6 @@ class AdminMessage {
       name: map['name'],
       email: map['email'],
       message: map['message'],
-      status: map['status'],
       adminNotes: map['admin_notes'],
       createdAt: DateTime.parse(map['created_at']),
       updatedAt: DateTime.parse(map['updated_at']),
@@ -41,7 +38,6 @@ class AdminMessage {
       name: name,
       email: email,
       message: message,
-      status: status ?? this.status,
       adminNotes: adminNotes ?? this.adminNotes,
       createdAt: createdAt,
       updatedAt: updatedAt,

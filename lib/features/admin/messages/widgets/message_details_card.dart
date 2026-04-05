@@ -17,32 +17,14 @@ class MessageDetailsCard extends ConsumerStatefulWidget {
       _MessageDetailsCardState();
 }
 
-class _MessageDetailsCardState
-    extends ConsumerState<MessageDetailsCard> {
+class _MessageDetailsCardState extends ConsumerState<MessageDetailsCard> {
   late TextEditingController _notesController;
   bool _saving = false;
 
   @override
   void initState() {
     super.initState();
-    _notesController =
-        TextEditingController(text: widget.message.adminNotes);
-  }
-
-  Future<void> _updateStatus(String status) async {
-    setState(() => _saving = true);
-    final service = ref.read(supabaseServiceProvider);
-
-    await service.updateMessageStatus(
-        id: widget.message.id, status: status);
-
-    ref.invalidate(messagesProvider);
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Status updated')),
-    );
-
-    setState(() => _saving = false);
+    _notesController = TextEditingController(text: widget.message.adminNotes);
   }
 
   Future<void> _saveNotes() async {
@@ -69,39 +51,21 @@ class _MessageDetailsCardState
       padding: const EdgeInsets.all(AppSpacing.xl),
       decoration: BoxDecoration(
         color: AppColors.cardBg,
-        borderRadius:
-        BorderRadius.circular(AppSpacing.radiusLg),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
         border: Border.all(color: AppColors.border),
       ),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(widget.message.name,
-                style: AppTextStyles.h3),
+            Text(widget.message.name, style: AppTextStyles.h3),
             const SizedBox(height: AppSpacing.sm),
-            Text(widget.message.email,
-                style: AppTextStyles.body),
+            Text(widget.message.email, style: AppTextStyles.body),
             const SizedBox(height: AppSpacing.lg),
-            Text(widget.message.message,
-                style: AppTextStyles.bodyLarge),
+            Text(widget.message.message, style: AppTextStyles.bodyLarge),
+
             const SizedBox(height: AppSpacing.xl),
-            DropdownButton<String>(
-              value: widget.message.status,
-              items: const [
-                DropdownMenuItem(
-                    value: 'new', child: Text('New')),
-                DropdownMenuItem(
-                    value: 'replied',
-                    child: Text('Replied')),
-                DropdownMenuItem(
-                    value: 'closed',
-                    child: Text('Closed')),
-              ],
-              onChanged:
-              _saving ? null : (v) => _updateStatus(v!),
-            ),
-            const SizedBox(height: AppSpacing.lg),
+
             TextField(
               controller: _notesController,
               maxLines: 4,
@@ -111,6 +75,7 @@ class _MessageDetailsCardState
               ),
             ),
             const SizedBox(height: AppSpacing.md),
+
             ElevatedButton(
               onPressed: _saving ? null : _saveNotes,
               child: const Text('Save Notes'),

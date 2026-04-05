@@ -30,12 +30,22 @@ class UploadImageButton extends ConsumerWidget {
 
     final service = ref.read(supabaseServiceProvider);
 
-    await service.uploadGalleryImage(
-      fileName: fileName,
-      bytes: bytes,
-    );
+    try {
+      await service.uploadGalleryImage(
+        fileName: fileName,
+        bytes: bytes,
+      );
 
-    ref.invalidate(galleryImagesProvider);
+      ref.invalidate(galleryImagesProvider);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Image uploaded successfully")),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Upload failed: $e")),
+      );
+    }
   }
 
   @override

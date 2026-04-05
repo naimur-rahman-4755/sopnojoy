@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sopnojoy/features/admin/volunteer/widgets/volunteer_admin_model.dart';
-import '../../../../core/provider/volunteer_admin_provider.dart';
-import 'volunteer_status_badge.dart';
-import 'volunteer_details_dialog.dart';
 
 class VolunteerDataTable extends ConsumerWidget {
   final List<VolunteerAdminModel> volunteers;
@@ -27,9 +24,7 @@ class VolunteerDataTable extends ConsumerWidget {
             DataColumn(label: Text('Phone')),
             DataColumn(label: Text('Email')),
             DataColumn(label: Text('Area')),
-            DataColumn(label: Text('Status')),
             DataColumn(label: Text('Created')),
-            DataColumn(label: Text('Actions')),
           ],
           rows: List.generate(volunteers.length, (index) {
             final v = volunteers[index];
@@ -41,37 +36,7 @@ class VolunteerDataTable extends ConsumerWidget {
                 DataCell(Text(v.phone)),
                 DataCell(Text(v.email)),
                 DataCell(Text(v.areaOfInterest)),
-                 DataCell(VolunteerStatusBadge(status: v.status)),
                 DataCell(Text(v.createdAt.toLocal().toString().split(' ')[0])),
-                DataCell(Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.visibility),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (_) =>
-                              VolunteerDetailsDialog(volunteer: v),
-                        );
-                      },
-                    ),
-                    DropdownButton<String>(
-                      value: v.status,
-                      underline: const SizedBox(),
-                      items: const [
-                        DropdownMenuItem(value: 'new', child: Text('New')),
-                        DropdownMenuItem(value: 'reviewed', child: Text('Reviewed')),
-                        DropdownMenuItem(value: 'accepted', child: Text('Accepted')),
-                        DropdownMenuItem(value: 'rejected', child: Text('Rejected')),
-                      ],
-                      onChanged: (val) {
-                        ref
-                            .read(volunteerAdminProvider.notifier)
-                            .updateStatus(v.id, val!);
-                      },
-                    ),
-                  ],
-                )),
               ],
             );
           }),

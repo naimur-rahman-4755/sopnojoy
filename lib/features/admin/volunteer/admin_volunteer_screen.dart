@@ -43,12 +43,6 @@ class _VolunteerAdminScreenState
               return Expanded(
                 child: Column(
                   children: [
-                    VolunteerFilterBar(
-                      total: data.length,
-                      selected: filter,
-                      onChanged: (val) =>
-                          setState(() => filter = val),
-                    ),
                     const SizedBox(height: AppSpacing.lg),
                     Expanded(
                       child: VolunteerDataTable(volunteers: filtered),

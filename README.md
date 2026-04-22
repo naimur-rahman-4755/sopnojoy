@@ -13,26 +13,28 @@ SopnoJoy is built with a strong focus on:
 
 The platform allows users to explore curated content while admins can efficiently manage everything through a dedicated admin panel.
 
-🖼️ Screenshots
-
-📷 Add your scrolling full-page screenshots here
-
-![Home Screen](screenshots/home.png)
-![Gallery Screen](screenshots/gallery.png)
-![Admin Dashboard](screenshots/admin_dashboard.png)
 🏗️ Architecture
 
 This project follows a Feature-First Architecture, ensuring scalability and maintainability.
 
-lib/
- ┣ core/                # Global configs (theme, constants, utils)
- ┣ features/            # Feature-based modules
- ┃ ┣ admin/
- ┃ ┣ gallery/
- ┃ ┣ home/
- ┃ ┗ etc...
- ┣ shared/              # Shared widgets/components
- ┗ main.dart
+sopnojoy/
+├── android/                # Android native config
+├── assets/                 # Fonts, icons, images
+│   ├── fonts/
+│   ├── icons/
+│   └── images/
+├── lib/                    # Main Flutter source code
+│   ├── main.dart
+│   ├── app/                # App config, routes, theme
+│   ├── core/               # Constants, services, providers, shared widgets
+│   └── features/           # Feature-based modules (admin & public)
+│       ├── admin/
+│       └── public/
+├── test/                   # Flutter tests
+├── web/                    # Web build support files
+├── pubspec.yaml            # Dependencies & assets config
+└── README.md               # Project documentation
+
 Why Feature-First?
 Easy to scale for large projects
 Better separation of concerns
@@ -112,11 +114,3 @@ Mobile version
 🙌 Author
 
 Md Naimur Rahman
-
-⭐ Support
-
-If you like this project:
-
-⭐ Star the repository
-🍴 Fork it
-🛠️ Contribute
